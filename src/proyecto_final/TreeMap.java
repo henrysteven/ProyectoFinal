@@ -7,7 +7,6 @@ package proyecto_final;
 
 import java.io.File;
 
-
 /**
  *
  * @author Henry
@@ -45,5 +44,26 @@ public class TreeMap<K, T> {
     public void addHijos(TreeMap<K, T> arbol) {
         this.root.getHijos().add(arbol);
     }
+
+    public boolean isLeaf() {
+        return root.getHijos().isEmpty();
+    }
+
+    public int nivelArbol(TreeMap<K, T> arbol,TreeMap<K, T> b) {
+        int mayor = 0;
+        int tmp;
+        if (arbol == null && arbol.getRoot().getKey().equals(b.getRoot().getKey())) {
+            return 0;
+        } else {
+            for (TreeMap<K, T> hijo : arbol.getRoot().getHijos()) {
+                tmp = nivelArbol(hijo,b);
+                if (tmp > mayor) {
+                    mayor = tmp;
+                }
+            }
+            return mayor + 1;
+        }
+    }
+
 
 }
